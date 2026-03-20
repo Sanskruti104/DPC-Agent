@@ -1,5 +1,9 @@
-# Dependency injection components for FastAPI routes will go here
-# e.g., get_db, get_current_user
+from typing import Generator
+from app.db.session import SessionLocal
 
-def get_db():
-    pass
+def get_db() -> Generator:
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
