@@ -1,4 +1,4 @@
-# Base configuration for database models and SQLAlchemy Declarative Base will go here
+from sqlalchemy.orm import DeclarativeBase
 
-class Base:
+class Base(DeclarativeBase):
     pass
