@@ -1,9 +1,18 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.api.routes import health
+from app.api.routes import health, user_routes
+from app.db.base import Base
+from app.db.session import engine
+from app.models import user  # Ensure models are imported
 
 def get_application() -> FastAPI:
+    # Create tables automatically
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        print(f"Warning: automatic table creation failed: {e}")
+
     app = FastAPI(
         title=settings.PROJECT_NAME,
         openapi_url=f"{settings.API_V1_STR}/openapi.json"
@@ -21,10 +30,8 @@ def get_application() -> FastAPI:
 
     # Include routers
     app.include_router(health.router, tags=["health"])
+    app.include_router(user_routes.router, prefix=settings.API_V1_STR, tags=["users"])
     
-    # Future scaling:
-    # app.include_router(other.router, prefix=settings.API_V1_STR, tags=["other"])
-
     return app
 
 app = get_application()

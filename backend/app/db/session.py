@@ -4,8 +4,12 @@ from app.core.config import settings
 
 engine = create_engine(
     settings.DATABASE_URL,
+    connect_args={
+        "sslmode": "require",
+        "connect_timeout": 5
+    },
     pool_pre_ping=True,
-    connect_args={"sslmode": "require"}
+    echo=True
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
