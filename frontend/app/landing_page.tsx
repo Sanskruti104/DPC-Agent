@@ -10,7 +10,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white text-center px-4 selection:bg-black selection:text-white relative overflow-hidden">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white text-center px-4 selection:bg-black selection:text-white">
       {/* Background radial gradient for modern feel */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-50 via-white to-white opacity-40"></div>
       
