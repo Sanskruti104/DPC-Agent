@@ -37,6 +37,9 @@ def get_application() -> FastAPI:
 
     from app.api.routes import rule_routes
     app.include_router(rule_routes.router, prefix=f"{settings.API_V1_STR}/rules", tags=["rules"])
+
+    from app.api.routes import dataset_routes
+    app.include_router(dataset_routes.router, prefix=f"{settings.API_V1_STR}/dataset", tags=["dataset"])
     
     return app
 
