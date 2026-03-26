@@ -41,6 +41,12 @@ def get_application() -> FastAPI:
     from app.api.routes import dataset_routes
     app.include_router(dataset_routes.router, prefix=f"{settings.API_V1_STR}/dataset", tags=["dataset"])
     
+    from app.api.routes import schema_routes
+    app.include_router(schema_routes.router, prefix=f"{settings.API_V1_STR}/schema", tags=["schema"])
+    
+    from app.api.routes import compliance_routes
+    app.include_router(compliance_routes.router, prefix=f"{settings.API_V1_STR}/compliance", tags=["compliance"])
+    
     return app
 
 app = get_application()
